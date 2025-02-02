@@ -96,7 +96,7 @@ function updateHistoryTable() {
             <td>रु${sale.price.toFixed(2)}</td>
             <td>रु${sale.total.toFixed(2)}</td>
             <td>${sale.time}</td>
-            <td><button class="delete-btn" style="background-color:rgb(237, 69, 69); color: white;" onclick="deleteItem(${index})">Delete</button></td>
+            <td><button class="delete-btn" style="background-color:rgb(237, 69, 69); color: white;" onclick="deleteHistoryItem(${index})">Delete</button></td>
         `;
     });
 }
@@ -122,7 +122,6 @@ function deleteHistoryItem(index) {
     updateHistoryTable();
     updateDailyTotal();
     localStorage.setItem('dailySales', JSON.stringify(dailySales));
-    
 }
 
 function deleteCurrentTransaction() {
@@ -137,42 +136,33 @@ function completePayment() {
     const currentTransactionTotal = currentTransaction.reduce((sum, sale) => sum + sale.total, 0);
     const change = receivedAmount - currentTransactionTotal;
     const errorMessage = document.getElementById("error-message");
-    if (change < 0 ) {
-        errorMessage.textContent= 'Insufficient amount ❌'; 
+    
+    if (change < 0) {
+        errorMessage.textContent = 'Insufficient amount ❌';
         errorMessage.style.color = "red";
         errorMessage.style.display = "block";
         errorMessage.style.opacity = "1";
         errorMessage.style.transform = "scale(1)";
         errorMessage.style.transition = "5s";
-        return
-        
+        return;
     }
-    else if (!receivedAmount ) {
-        errorMessage.textContent='Please enter the valid amount  ❌';  
+    else if (!receivedAmount) {
+        errorMessage.textContent = 'Please enter the valid amount  ❌';
         errorMessage.style.color = "red";
         errorMessage.style.display = "block";
         errorMessage.style.opacity = "1";
         errorMessage.style.transform = "scale(1)";
         errorMessage.style.transition = "5s";
-          
-        return
+        return;
     }
     else {
-        errorMessage.textContent = "Thank you for shopping with us don't forget to take your receipt and change ✅";   
+        errorMessage.textContent = "Thank you for shopping with us don't forget to take your receipt and change ✅";
         errorMessage.style.color = "#4CAF50";
         errorMessage.style.display = "block";
         errorMessage.style.opacity = "1";
         errorMessage.style.transform = "scale(1)";
         errorMessage.style.transition = "2s";
-       
-
     }
-      
-        
-        
-         
-      
- 
 
     dailySales = dailySales.concat(currentTransaction);
     localStorage.setItem('dailySales', JSON.stringify(dailySales));

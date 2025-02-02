@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="redirect.css">
+    <title>System Check</title>
+    <script>
+        async function getSystemInfo() {
+            let infoContainer = document.getElementById("info");
+            let messages = [
+                "अपरेटिङ सिस्टम संस्करण जाँच गर्दै...",
+                "CPU उपयोग जाँच गर्दै...",
+                "GPU उपयोग जाँच गर्दै...",
+                "RAM को प्रयोग जाँच गर्दै....",
+                "सफ्टवेयर प्रारम्भ गर्दै.......",
+                "V-POS प्रणालीमा स्वागत छ"
+            ];
+            
+            let index = 0;
+            function updateInfo() {
+                if (index < messages.length) {
+                    infoContainer.textContent = messages[index];
+                    infoContainer.classList.remove("fade-in");
+                    void infoContainer.offsetWidth; // Trigger reflow to restart animation
+                    infoContainer.classList.add("fade-in");
+                    index++;
+                    setTimeout(updateInfo, 4000);
+                } else {
+                    window.location.href = 'pos.html';
+                }
+            }
+            
+            updateInfo();
+        }
+        window.onload = getSystemInfo;
+    </script>
+    <style>
+      
+    </style>
+</head>
+<body>
+    <h2>V इको-सिस्टममा तपाईलाई स्वागत छ</h2>
+    <div id="info" class="fade-in"></div>
+</body>
+</html>

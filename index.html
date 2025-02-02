@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #2c3e50, #16e38a);
+            color: rgb(245, 238, 238);
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+          
+        }
+
+        #info {
+            font-size: 1rem;
+            padding: 5px;
+            border-radius: 8px;
+          
+            
+            min-width: 300px;
+            text-align: left;
+         
+            min-height: 50px;
+            display: inline-block;
+        }
+
+        ul {
+            list-style-type:none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            opacity: 0;
+            animation: fade-in 1s forwards;
+            margin-bottom: 2px;
+        }
+
+        @keyframes fade-in {
+    100% {
+		opacity: 20;
+		transform: translateY(px);
+	}
+	100% {
+		opacity: 1;
+		
+	}
+}
+        .button {
+            padding: 12px 20px;
+            background: linear-gradient(to right, #9ba8ac, #74c7ad);
+            color: white;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.1s fade-in;
+            box-shadow: 0px 4px 6px rgba(183, 31, 31, 0.2);
+        }
+
+        .button:hover {
+            background: linear-gradient(to right, #1cd855, #35f106);
+            
+        }
+    </style>
+    <script>
+        async function getSystemInfo() {
+            let infoContainer = document.getElementById("info");
+            let messages = [
+                "Welcome to the V eco-system",
+                "This POS system is developed by Vishal as V-POS System version 1.0",
+                "By using this V-POS system, you agree to the following terms and conditions:",
+                "1. This is a free and always be free POS system .",
+                "2. We do not store any data on our servers.",
+                "3. We are not responsible for any data loss because we do not store any data.",
+                "4. This V-POS system is not for commercial use we only this system is only for sales management other fuction such as inventory management tax management etc will be added soon.",
+                "5. This V-POS system is developed for small businesses those retailer who cannot support or buy.",
+                "6. This V-POS system is not for large businesses.",
+                "7. printin receipt and barcode scanner is not given due to every retaler shop dont have both machine .",
+                "8.No legal action or provision can be taken against this POS system or the developer.",
+                "This system developed by independently and not supported by any organization .",
+                "You can contact the developer if you have any queries or suggestions: kill.vishal9@gmail.com"
+            ];
+            
+            let ul = document.createElement("ul");
+            infoContainer.appendChild(ul);
+            
+            let index = 0;
+            let interval = setInterval(() => {
+                if (index < messages.length) {
+                    let li = document.createElement("li");
+                    li.textContent = messages[index];
+                    li.style.animationDelay = `${index * 1}s`;
+                    ul.appendChild(li);
+                    index++;
+                } else {
+                    clearInterval(interval);
+                }
+            }, 500);
+        }
+
+        function redirectToPOS() {
+            window.location.href = "redirect.html";
+        }
+
+        window.onload = getSystemInfo;
+    </script>
+</head>
+<body>
+    <h2>Welcome To "V eco-system"</h2>
+    <div id="info"></div>
+    <br>
+    <button class="button" onclick="redirectToPOS()">OK</button>
+</body>
+</html>

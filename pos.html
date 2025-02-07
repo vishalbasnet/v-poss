@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> V-POS System</title>
+    <link rel="stylesheet" href="pos.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+</head>
+<body>
+    <div class="warning-dialog">
+        <div class="warning-content">
+            <span class="warning-icon"></span>
+            <p class="warning-text">⚠️ Warning: Please don't refresh your browser without saving data</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1> V-POS System <h4>Developed by Vishal Basnet</h4></h1>
+        
+       
+        <!-- Product Entry Form -->
+        <form id="pos-form">
+            <div class="form-group">
+                <label for="product-id">Product ID</label>
+                <input type="text" id="product-id" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="product-name">Product Name</label>
+                <input type="text" id="product-name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="unit-type">Unit Type</label>
+                <select id="unit-type" required>
+                    <option value="kg">Kilogram (kg)</option>
+                    <option value="packet">Packet</option>
+                    <option value="bottle">Btl</option>
+                    <option value="can">Can</option>
+                    <option value="cone">cone</option>
+                    <option value="dabba">Dabba</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="quantity">Quantity</label>
+                <input type="number" id="quantity" step="0.01" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="price">Price per unit</label>
+                <input type="number" id="price" step="0.01" required>
+            </div>
+            
+            <button type="submit">Add Item</button>
+        </form>
+        
+        <!-- Current Transaction Table -->
+        <div class="section">
+            <h2>Current Transaction</h2>
+            <table id="sales-table">
+                <thead>
+                    <tr>
+                        <th>Product ID</th>
+                        <th>Product Name</th>
+                        <th>Unit Type</th>
+                        <th>Quantity</th>
+                        <th>Price/Unit</th>
+                        <th>Total</th>
+                        <th>Time</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="sales-body">
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Payment Section -->
+        <div class="payment-section">
+            <div class="totals-container">
+                <div class="total" id="current-transaction-total">Current Transaction Total: रु 0.00</div>
+                <div class="total" id="daily-total">Daily Total: रु 0.00</div>
+            </div>
+
+            <div class="form-group">
+                <label for="received-amount">Received Amount</label>
+                <input type="number" id="received-amount" step="0.01" required>
+            </div>
+
+            <div class="total" id="change-amount">Change: रु 0.00</div>
+            
+            <div>
+                <button class="export-btn" onclick="exportToCSV()">Export to CSV</button>
+                <button class="delete-btn" onclick="deleteCurrentTransaction()">Delete Current Transaction</button>
+                <button class="export-btn" onclick="completePayment()">Complete Payment</button>
+            </div>
+                <div>
+                    <p id="error-message" class="error" style="color: rgb(247, 8, 8);"></p>
+                
+                </div>
+        </div>
+        
+
+        <!-- Receipt Section -->
+        <div class="section" id="receipt-section" style="display: none;">
+            <h2>Receipt</h2>
+            <div id="receipt-content"></div>
+            <button onclick="printReceipt()">Print Receipt</button>
+        </div>
+
+        <!-- Sales History Section -->
+        <div class="section">
+            <h2>Sales History</h2>
+            <table id="history-table">
+                <thead>
+                    <tr>
+                        <th>Product ID</th>
+                        <th>Product Name</th>
+                        <th>Unit Type</th>
+                        <th>Quantity</th>
+                        <th>Price/Unit</th>
+                        <th>Total</th>
+                        <th>Time</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="history-body">
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Sales Analytics Section -->
+        <div class="section">
+            <h2>Sales Analytics</h2>
+            <div class="chart-container">
+                <canvas id="salesChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script src="ob.obfuscated.js"></script>
+</body>
+</html>
